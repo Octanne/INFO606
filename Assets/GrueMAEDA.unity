@@ -1015,8 +1015,8 @@ ArticulationBody:
   m_XDrive:
     lowerLimit: 0
     upperLimit: 45
-    stiffness: 1000
-    damping: 100
+    stiffness: 10000
+    damping: 1000
     forceLimit: 3.4028235e+38
     target: 0
     targetVelocity: 0
@@ -1993,7 +1993,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1441013807
+--- !u!114 &1441013808
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2002,7 +2002,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1441013805}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24e39abddf21b3f44a3a1cccefdf5772, type: 3}
+  m_Script: {fileID: 11500000, guid: 014cdb4e7632bc44b8abeb05e451993b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   piedsBase:
@@ -2018,15 +2018,17 @@ MonoBehaviour:
   piedsTop:
   - {fileID: 1988350084}
   - {fileID: 1480021066}
-  - {fileID: 915815767}
   - {fileID: 1234616623}
+  - {fileID: 915815767}
   mat: {fileID: 1795816509}
   angleBase: 135
   angleMiddle: 60
   angleTop: 90
-  speed: 50
+  timerAfterFirstStep: 30
+  speedRotate: 30
+  speedRotateMat: 30
   speedTravel: 1
-  speedRotate: 50
+  speedDeploy: 50
 --- !u!1 &1480021066 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8769823331393987935, guid: 7823785cc4d4f7745a1ca05bad3ee453, type: 3}
@@ -2209,10 +2211,10 @@ ArticulationBody:
   m_LinearZ: 2
   m_SwingY: 2
   m_SwingZ: 2
-  m_Twist: 2
+  m_Twist: 1
   m_XDrive:
-    lowerLimit: 360
-    upperLimit: 0
+    lowerLimit: -180
+    upperLimit: 180
     stiffness: 1000
     damping: 100
     forceLimit: 3.4028235e+38
