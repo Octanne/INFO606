@@ -52,7 +52,6 @@
      <Compile Include="Assets\Scripts\ChariotCommande.cs" />
      <Compile Include="Assets\Scripts\GrueController.cs" />
      <Compile Include="Assets\Scripts\FlecheCommande.cs" />
-     <Compile Include="Assets\Scripts\SupportControler.cs" />
  <Reference Include="UnityEngine">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.44f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>

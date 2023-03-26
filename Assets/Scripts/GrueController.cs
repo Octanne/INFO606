@@ -5,11 +5,13 @@ using UnityEngine;
 public class GrueController : MonoBehaviour
 {
     // Tableau de pieds
-    public GameObject[] piedsBase;
-    public GameObject[] piedsMiddle;
-    public GameObject[] piedsTop;
+    public GameObject[] piedsBase = new GameObject[4];
+    public GameObject[] piedsMiddle = new GameObject[4];
+    public GameObject[] piedsTop = new GameObject[4];
 
     public GameObject mat;
+    public GameObject moufle;
+    public GameObject crochet;
 
     public int angleBase = 135;
     public int angleMiddle = 45;
@@ -32,6 +34,7 @@ public class GrueController : MonoBehaviour
     bool inDeployement = false;
     bool isFullyDeployed = false;
     bool flecheIsRotate = false;
+    bool moufleDown = false;
 
     // Start is called before the first frame update
     void Start()
@@ -78,6 +81,39 @@ public class GrueController : MonoBehaviour
                 Debug.Log("Undeployement");
             }
         }
+
+        // Control moufle 
+        if (Input.GetKey(KeyCode.PageUp)) {
+            monterMoufle();
+        }
+
+        if (Input.GetKey(KeyCode.PageDown)) {
+            descendreMoufle();
+        }
+    }
+
+    void descendreMoufle() {
+        ArticulationBody articulation = moufle.GetComponent<ArticulationBody>();
+        float rotationChange = (float)speedDeploy*15 * Time.fixedDeltaTime;
+        float rotationGoal = getRotation(articulation) + rotationChange;
+        if (rotationGoal > 3) {
+            rotationGoal = 3;
+        }
+
+        moufleDown = true;
+        setRotation(articulation, rotationGoal);
+    }
+
+    void monterMoufle() {
+        ArticulationBody articulation = moufle.GetComponent<ArticulationBody>();
+        float rotationChange = (float)speedDeploy*15 * Time.fixedDeltaTime;
+        float rotationGoal = getRotation(articulation) - rotationChange;
+        if (rotationGoal < 0) {
+            rotationGoal = 0;
+        }
+
+        moufleDown = true;
+        setRotation(articulation, rotationGoal);
     }
 
     void FixedUpdate() {
@@ -155,14 +191,6 @@ public class GrueController : MonoBehaviour
     }
 
     void undeploy() {
-        // Remise de la flèche à 0
-        if (flecheIsRotate) {
-            ArticulationBody articulationBody = mat.GetComponent<ArticulationBody>();
-            if (updateRotation(articulationBody, 0)) {
-                flecheIsRotate = false;
-            }
-        }
-
         if (!flecheIsRotate && isFullyDeployed) {
             for (int i = 0; i < piedsMiddle.Length; i++)
             {
